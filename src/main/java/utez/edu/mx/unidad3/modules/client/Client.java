@@ -2,6 +2,7 @@ package utez.edu.mx.unidad3.modules.client;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import utez.edu.mx.unidad3.modules.warehouse.Warehouse;
 
 import java.util.List;
@@ -15,12 +16,23 @@ public class Client {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Pattern(regexp = "^[a-zA-záéíóúÁÉÍÓÚñÑ][\\sa-zA-záéíóúÁÉÍÓÚñÑ]{3,}$", message = "Solo se aceptan letras")
+    @NotNull(message = "Ingresa los datos")
+    @NotBlank(message = "No puedes dejar este campo vacio")
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Size(min = 10, max = 10, message = "Debe ser al menos un num. telefonico de 10 digitos")
+    @Pattern(regexp = "^\\d+$", message = "Solo se aceptan numeros")
+    @NotNull(message = "Ingresa los datos")
+    @NotBlank(message = "No puedes dejar este campo vacio")
     @Column(name = "phone", nullable = false)
     private String phone;
 
+    @Email
+    @Pattern(regexp = "^[a-z0-9._-]+@[a-z0-9]{2,}(\\.[a-z0-9]{2,}){1,2}$", message = "Coloca un correo valido")
+    @NotNull(message = "Ingresa los datos de correo")
+    @NotBlank(message = "No puedes dejar este campo vacio")
     @Column(name = "email", nullable = false)
     private String email;
 
